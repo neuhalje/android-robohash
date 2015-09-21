@@ -1,15 +1,22 @@
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.2.0'
+        classpath 'com.android.tools.build:gradle:1.2.3'
+        classpath 'org.codehaus.groovy:gradle-groovy-android-plugin:0.3.6'
     }
 }
+repositories {
+    mavenCentral()
+}
+apply plugin: 'com.android.library'
+apply plugin: 'groovyx.grooid.groovy-android'
+
 task wrapper(type: Wrapper) {
     gradleVersion = '2.7'
 }
-apply plugin: 'android-library'
+
 
 android {
     compileSdkVersion 'android-17'
@@ -21,4 +28,9 @@ android {
             proguardFile getDefaultProguardFile('proguard-android.txt')
         }
     }
+}
+
+dependencies {
+    testCompile "org.codehaus.groovy:groovy:2.4.4"
+    testCompile 'org.robospock:robospock:0.8.0'
 }
