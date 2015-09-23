@@ -28,11 +28,15 @@ public final class Handle {
 
     @Override
     public String toString() {
-        return String.format("%016X",value);
+        return String.format("%016X", value);
     }
 
     @Override
     public int hashCode() {
         return (int) value;
+    }
+
+    public byte[] bucketValues() {
+        return HandleFactory.bucketValues(this.value);
     }
 }

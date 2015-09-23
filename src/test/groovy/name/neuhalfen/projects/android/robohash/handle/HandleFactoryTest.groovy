@@ -4,18 +4,39 @@ import spock.lang.*
 
 
 class HandleFactoryTest extends spock.lang.Specification {
+
+
     def "CalculateHandleValue"(bytes, long expected) {
         expect:
         HandleFactory.calculateHandleValue(bytes as byte[]) == expected
 
         where:
-        bytes                                                || expected
-        [0]                                                  || 0x00
-        [0xB]                                                || 0x0B
-        [0xA, 0]                                             || 0xA0
-        [0xA, 0xB]                                           || 0xAB
-        [0xF, 0xE, 0, 0, 0, 0, 0, 0]                         || 0xFE000000
-        [0xF, 0xE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] || 0xFE00000000000000
+        bytes                                          || expected
+        [0]                                            || 0x100000000000000
+        [0xB]                                          || 0x10000000000000B
+        [0xA, 0]                                       || 0x2000000000000A0
+        [0xA, 0xB]                                     || 0x2000000000000AB
+        [0xF, 0xE, 0, 0, 0, 0, 0, 0]                   || 0x8000000FE000000
+        [0xF, 0xE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]    || 0xD0FE00000000000
+        [0xF, 0xE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] || 0xEFE000000000000
+
+    }
+
+    def "size is correctly stored"(bytes, long expected) {
+        given:
+        def value = HandleFactory.calculateHandleValue(bytes as byte[])
+
+        expect:
+        HandleFactory.getSize(value) == expected
+
+        where:
+        bytes                                          || expected
+        [0]                                            || 1
+        [0xB]                                          || 1
+        [0xA, 0]                                       || 2
+        [0xA, 0xB]                                     || 2
+        [0xF, 0xE, 0, 0, 0, 0, 0, 0]                   || 8
+        [0xF, 0xE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] || 14
 
     }
 
@@ -37,13 +58,31 @@ class HandleFactoryTest extends spock.lang.Specification {
 
     }
 
-    def "nibble #15 is unavailable bc. I am to lazy"() {
+    def "nibble >15 is unavailable bc. I am to lazy"() {
 
         when:
-        HandleFactory.getNibbleAt(0, 15)
+        HandleFactory.getNibbleAt(0, 16)
 
         then:
         thrown IllegalArgumentException
+    }
+
+
+    def "handle: to and from handle values works"(bytes) {
+        given:
+        def value = HandleFactory.calculateHandleValue(bytes as byte[])
+
+        expect:
+        HandleFactory.bucketValues(value) == bytes
+
+        where:
+        bytes << [
+                [0],
+                [0xB],
+                [0xA, 0],
+                [0xA, 0xB],
+                [0xF, 0xE, 0, 0, 0, 0, 0, 0],
+                [0xE, 0xD, 0xC, 0xB, 0xA, 9, 8, 7, 6, 5, 4, 3, 2, 1]]
     }
 
 }

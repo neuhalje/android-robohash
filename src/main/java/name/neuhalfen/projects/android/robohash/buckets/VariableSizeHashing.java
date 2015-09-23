@@ -10,7 +10,7 @@ import java.util.UUID;
  * <p/>
  * Each bucket is defined by a maximum value. The implementation guarantees that the values in bucket n is in the
  * range 0..(bucketSize[n]-1).
- * 
+ *
  */
 public class VariableSizeHashing {
     private final byte[] bucketSizes;
