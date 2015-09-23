@@ -10,7 +10,7 @@ class IntegrationTest extends spock.lang.Specification {
 
         given:
         Configuration configuration = new Set1Configuration()
-        VariableSizeHashing bucketeer = new VariableSizeHashing(configuration.buckets)
+        VariableSizeHashing bucketeer = new VariableSizeHashing(configuration.bucketSizes)
 
         def uuid = UUID.fromString(uuidString)
 

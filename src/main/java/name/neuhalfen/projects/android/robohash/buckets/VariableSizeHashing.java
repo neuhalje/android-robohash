@@ -10,7 +10,6 @@ import java.util.UUID;
  * <p/>
  * Each bucket is defined by a maximum value. The implementation guarantees that the values in bucket n is in the
  * range 0..(bucketSize[n]-1).
- *
  */
 public class VariableSizeHashing {
     private final byte[] bucketSizes;
@@ -30,7 +29,7 @@ public class VariableSizeHashing {
     /**
      * Takes the hash value and distributes it over the buckets.
      * <p/>
-     * Assumption: the value of hash is (much) larger than 16^bucketSizes.length and uniformly distributed (e.g. random)
+     * Assumption: the value of hash is (much) larger than 16^bucketSizes.length and uniformly distributed (random)
      *
      * @param hash
      * @return buckets
@@ -40,15 +39,15 @@ public class VariableSizeHashing {
         int currentBucket = 0;
         byte[] ret = new byte[this.bucketSizes.length];
 
-        while (hash.compareTo(BigInteger.ZERO) > 0) {
+        while (currentBucket < this.bucketSizes.length) {
             BigInteger[] divisorReminder = hash.divideAndRemainder(BigInteger.valueOf(bucketSizes[currentBucket]));
 
             hash = divisorReminder[0];
             long reminder = divisorReminder[1].longValue();
 
-            ret[currentBucket] = (byte) ((ret[currentBucket] + reminder) % bucketSizes[currentBucket]);
+            ret[currentBucket] = (byte) Math.abs(reminder % bucketSizes[currentBucket]);
 
-            currentBucket = (currentBucket + 1) % this.bucketSizes.length;
+            currentBucket += 1;
         }
 
         return ret;

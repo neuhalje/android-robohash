@@ -2,9 +2,10 @@ package name.neuhalfen.projects.android.robohash.paths;
 
 
 public class Set1Configuration implements Configuration {
-    private final static String ROOT = "/sets/set1";
+    private final static String ROOT = "sets/set1";
 
     private final static int BUCKET_COLOR = 0;
+
     private static final int COLOR_COUNT = 10;
     private static final int BODY_COUNT = 10;
     private static final int FACE_COUNT = 10;
@@ -63,11 +64,11 @@ public class Set1Configuration implements Configuration {
 
     private String generatePath(String facetPathTemplate, String color, int bucketValue) {
         // TODO: Make more efficient
-        return facetPathTemplate.replace("#ROOT#", ROOT).replaceAll("#COLOR#", color).replaceAll("#ITEM#", String.format("%02d", bucketValue));
+        return facetPathTemplate.replace("#ROOT#", ROOT).replaceAll("#COLOR#", color).replaceAll("#ITEM#", String.format("%02d", bucketValue + 1));
     }
 
     @Override
-    public byte[] getBuckets() {
+    public byte[] getBucketSizes() {
         return BUCKET_SIZES;
     }
 }
