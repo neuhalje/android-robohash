@@ -2,6 +2,8 @@ package name.neuhalfen.projects.android.robohash;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import name.neuhalfen.projects.android.robohash.buckets.VariableSizeHashing;
 import name.neuhalfen.projects.android.robohash.handle.Handle;
 import name.neuhalfen.projects.android.robohash.handle.HandleFactory;
@@ -43,7 +45,7 @@ public class RoboHash {
 
 
     /**
-     * This can be VERY slow
+     * This can be VERY slow (~20ms on a Nexus5,)
      *
      * @param handle
      * @return image (1024x1024) that identifies the handle
@@ -53,10 +55,13 @@ public class RoboHash {
         byte[] bucketValues = handle.bucketValues();
         String[] paths = configuration.convertToFacetParts(bucketValues);
 
+        int sampleSize = 1;
+
         Bitmap[] facets = new Bitmap[paths.length];
         for (int i = 0; i < facets.length; i++) {
-            facets[i] = repository.get(paths[i]);
+            facets[i] = repository.get(paths[i],sampleSize);
         }
         return renderer.merge(facets);
     }
+
 }

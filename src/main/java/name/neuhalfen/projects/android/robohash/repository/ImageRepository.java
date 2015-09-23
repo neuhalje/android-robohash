@@ -16,12 +16,16 @@ public class ImageRepository {
         this.assets = assets;
     }
 
-    public Bitmap get(String path) throws IOException {
-        // TODO caching
+
+    public Bitmap get(String path, int sampleSize) throws IOException {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = sampleSize;
+        options.inMutable = false;
+
         InputStream inputStream = null;
         try {
             inputStream = assets.open(path);
-            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStream, null, options);
             return bitmap;
         } finally {
             if (null != inputStream) {
@@ -29,4 +33,6 @@ public class ImageRepository {
             }
         }
     }
+
+
 }
