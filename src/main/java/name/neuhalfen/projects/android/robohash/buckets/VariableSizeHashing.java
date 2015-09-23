@@ -4,10 +4,18 @@ package name.neuhalfen.projects.android.robohash.buckets;
 import java.math.BigInteger;
 import java.util.UUID;
 
-public class Bucketing {
+/**
+ * "Hash" a big integer (expected: hash or uuid) into buckets. The goal is to deterministically
+ * "repack" the randomness of the hash into the bucket.
+ * <p/>
+ * Each bucket is defined by a maximum value. The implementation guarantees that the values in bucket n is in the
+ * range 0..(bucketSize[n]-1).
+ * 
+ */
+public class VariableSizeHashing {
     private final byte[] bucketSizes;
 
-    public Bucketing(byte[] bucketSizes) {
+    public VariableSizeHashing(byte[] bucketSizes) {
         this.bucketSizes = bucketSizes;
     }
 

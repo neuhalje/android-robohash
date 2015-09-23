@@ -11,7 +11,7 @@ class BucketingTest extends spock.lang.Specification {
     def "bucketing from BigInteger works"(bucketSizes, BigInteger hash, expected) {
 
         given:
-        Bucketing bucketing = new Bucketing(bucketSizes as byte[])
+        VariableSizeHashing bucketing = new VariableSizeHashing(bucketSizes as byte[])
 
         expect:
         bucketing.createBuckets(hash) == expected as byte[]
@@ -36,7 +36,7 @@ class BucketingTest extends spock.lang.Specification {
     def "bucketing from UUID  works"(bucketSizes, String uuid, expected) {
 
         given:
-        Bucketing bucketing = new Bucketing(bucketSizes as byte[])
+        VariableSizeHashing bucketing = new VariableSizeHashing(bucketSizes as byte[])
 
         expect:
         bucketing.createBuckets(UUID.fromString(uuid)) == expected as byte[]
