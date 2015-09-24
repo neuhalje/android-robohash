@@ -106,7 +106,7 @@ bintray {
         name = "robohash"
         websiteUrl = siteUrl
         vcsUrl = gitUrl
-        licenses = ["MIT","CC-BY 3.0"]
+        licenses = ["MIT"]
         publish = true
     }
 }
