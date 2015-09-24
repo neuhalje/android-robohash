@@ -3,24 +3,20 @@ Robohash for Android!
 
 This library creates recognizable images of cute robots from hash values (or basically any other data). It is a port of the source at [RoboHash.org](http:/RoboHash.org).
 
-![Example robot 1](examples/robot1.png)
-![Example robot 2](examples/robot2.png)
+![Example robot 1](readme.d/robot1.png)
 
 Usage
 ==========
 
 Sometimes is necessary to create a _personality_ for data in your applications. A prime example are avatars for users that have no photo attached.
 
+See the [example project](https://github.com/neuhalje/android-robohash-example).
+
 Configuration
 ----------------
 
-*Setup*
-* Configure the allowed background sets
-* Configure the allowed robot sets
-* Configure the allowed colors (red, green, ...)
-
 *Calculate the image*
-* Pass in the hash of the data you want to 'personalize'. Get a stable (== you can persist it) handle
+* Pass in the hash (or an uuid) of the data you want to 'personalize'. Get a stable (== you can persist it) handle
 
 *Get an image*
 * pass in the handle, and the desired resolution to get the image
@@ -29,6 +25,8 @@ Configuration
 Example robots
 -------------------
 
+![Example robot 1](readme.d/robot1.png)
+![Example robot 2](readme.d/robot2.png)
 
 Contributors
 ==================
@@ -38,3 +36,8 @@ Contributors
 * Set 3 artwork created by Julian Peter Arias.
 
 The RoboHash images are available under the CC-BY-3.0 license.
+
+
+Publish
+=========
+`./gradlew bintrayUpload`
