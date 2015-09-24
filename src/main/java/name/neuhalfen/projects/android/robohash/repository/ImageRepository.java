@@ -4,13 +4,14 @@ package name.neuhalfen.projects.android.robohash.repository;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-// TODO:test
 public class ImageRepository {
     private final AssetManager assets;
+    private Bitmap buffer = null;
 
     public ImageRepository(AssetManager assets) {
         this.assets = assets;
@@ -35,6 +36,10 @@ public class ImageRepository {
     }
 
     public Bitmap createBuffer(String path, int sampleSize) throws IOException {
+        if (buffer != null) {
+            return buffer;
+        }
+
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = sampleSize;
         options.inMutable = true;
@@ -43,6 +48,7 @@ public class ImageRepository {
         try {
             inputStream = assets.open(path);
             Bitmap bitmap = BitmapFactory.decodeStream(inputStream, null, options);
+            buffer = bitmap;
             return bitmap;
         } finally {
             if (null != inputStream) {
@@ -70,4 +76,7 @@ public class ImageRepository {
     }
 
 
+    public void returnBuffer(Bitmap buffer) {
+            buffer.eraseColor(Color.TRANSPARENT);
+    }
 }

@@ -19,7 +19,7 @@ public class RoboHash {
     private final static HandleFactory handleFactory = new HandleFactory();
 
     private final Configuration configuration = new Set1Configuration();
-   private final ImageRepository repository;
+    private final ImageRepository repository;
     private final VariableSizeHashing hashing = new VariableSizeHashing(configuration.getBucketSizes());
 
 
@@ -40,7 +40,7 @@ public class RoboHash {
     }
 
     /**
-     * This can be VERY slow (~20ms on a Nexus5,)
+     * This can be VERY slow (~15ms on a Nexus 5)
      *
      * @param handle
      * @return image (1024x1024) that identifies the handle
@@ -63,6 +63,7 @@ public class RoboHash {
         for (int i = 1; i < paths.length; i++) {
             merged.drawBitmap(repository.getInto(buffer, paths[i], sampleSize), 0, 0, paint);
         }
+        repository.returnBuffer(buffer);
         return target;
     }
 
