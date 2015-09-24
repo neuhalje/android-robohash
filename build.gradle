@@ -54,7 +54,7 @@ def siteUrl = 'https://github.com/neuhalje/android-robohash'      // Homepage UR
 def gitUrl = 'https://github.com/neuhalje/android-robohash.git'   // Git repository URL
 
 group = "name.neuhalfen.projects.android"                                        // Maven Group ID for the artifact
-version = "1.0.0"
+version = "1.0.1"
 
 
 install {

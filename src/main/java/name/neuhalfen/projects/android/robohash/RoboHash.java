@@ -9,7 +9,6 @@ import name.neuhalfen.projects.android.robohash.handle.Handle;
 import name.neuhalfen.projects.android.robohash.handle.HandleFactory;
 import name.neuhalfen.projects.android.robohash.paths.Configuration;
 import name.neuhalfen.projects.android.robohash.paths.Set1Configuration;
-import name.neuhalfen.projects.android.robohash.rendering.Renderer;
 import name.neuhalfen.projects.android.robohash.repository.ImageRepository;
 
 import java.io.IOException;
@@ -20,8 +19,7 @@ public class RoboHash {
     private final static HandleFactory handleFactory = new HandleFactory();
 
     private final Configuration configuration = new Set1Configuration();
-    private final Renderer renderer = new Renderer();
-    private final ImageRepository repository;
+   private final ImageRepository repository;
     private final VariableSizeHashing hashing = new VariableSizeHashing(configuration.getBucketSizes());
 
 
@@ -29,20 +27,17 @@ public class RoboHash {
         this.repository = new ImageRepository(context.getAssets());
     }
 
-    public Handle calculateHandleFromBucketValues(byte[] data) {
-        return handleFactory.calculateHandle(data);
-    }
+    // //    untested
+    // public Handle calculateHandleFromBinary(byte[] binary) {
+    //     byte[] data = hashing.createBuckets(new BigInteger(binary));
+    //     return handleFactory.calculateHandle(data);
+    // }
 
 
     public Handle calculateHandleFromUUID(UUID uuid) {
         byte[] data = hashing.createBuckets(uuid);
         return handleFactory.calculateHandle(data);
     }
-
-    public byte[] getBucketSizes() {
-        return configuration.getBucketSizes();
-    }
-
 
     /**
      * This can be VERY slow (~20ms on a Nexus5,)
@@ -57,11 +52,18 @@ public class RoboHash {
 
         int sampleSize = 1;
 
-        Bitmap[] facets = new Bitmap[paths.length];
-        for (int i = 0; i < facets.length; i++) {
-            facets[i] = repository.get(paths[i],sampleSize);
+        Bitmap buffer = repository.createBuffer(paths[0], sampleSize);
+        Bitmap target = buffer.copy(Bitmap.Config.ARGB_8888, true);
+
+
+        Canvas merged = new Canvas(target);
+        Paint paint = new Paint(0);
+
+        // First image already added as copy form the buffer
+        for (int i = 1; i < paths.length; i++) {
+            merged.drawBitmap(repository.getInto(buffer, paths[i], sampleSize), 0, 0, paint);
         }
-        return renderer.merge(facets);
+        return target;
     }
 
 }
