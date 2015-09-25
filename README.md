@@ -1,6 +1,7 @@
 Robohash for Android!
 ==========================
-
+[![Build Status](https://travis-ci.org/neuhalje/android-robohash.svg?branch=master)](https://travis-ci.org/neuhalje/android-robohash)
+ 
 This library creates recognizable images of cute robots from hash values (or basically any other data). It is a port of the source at [RoboHash.org](http:/RoboHash.org).
 
 ![Example robot 1](readme.d/robot1.png)
