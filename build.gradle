@@ -41,12 +41,21 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
     }
 }
 
 dependencies {
     testCompile "org.codehaus.groovy:groovy:2.4.4"
     testCompile 'org.robospock:robospock:0.8.0'
+
+    androidTestCompile 'junit:junit:4.12'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2'
+    androidTestCompile 'com.android.support.test:runner:0.3'
 }
 
 apply from: 'deploy_in_jcenter.gradle'
