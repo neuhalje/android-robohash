@@ -7,7 +7,6 @@ def siteUrl = 'https://github.com/neuhalje/android-robohash'
 def gitUrl = 'https://github.com/neuhalje/android-robohash.git'
 
 group = "name.neuhalfen.projects.android"
-version = "1.0.3"
 
 
 install {
