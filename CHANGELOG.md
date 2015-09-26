@@ -1,6 +1,9 @@
+## NEXT
+* README updated
+
 ## 1.0.4  Bugfix Release
 * Instrumentation tests
-* The second (,third,..) robot had no body.
+* bugfix: The second (,third,..) robot had no body.
 
 ## 1.0.3  Add Caching
 * Add `RoboHash::useCache(LruCache)`
