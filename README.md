@@ -30,7 +30,7 @@ buildscript {
 // ...
 
 dependencies {
-    compile(group: 'name.neuhalfen.projects.android', name: 'android-robohash', version: '1.0.3', ext: 'aar')
+    compile(group: 'name.neuhalfen.projects.android', name: 'android-robohash', version: '1.0.4', ext: 'aar')
 }
 ```
 
