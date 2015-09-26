@@ -50,7 +50,7 @@ Handle immutableHandle = robots.calculateHandleFromUUID(uuid);
 ```
 
 ### Get the robot!
-* Pass in the handle to get the image. Images are always 1024x1024 pixels.
+* Pass in the handle to get the image. Images are currently 300x300 pixels.
 
 ```java
 // Advice: Keep a global (Application) instance of RoboHash to enable caching.
