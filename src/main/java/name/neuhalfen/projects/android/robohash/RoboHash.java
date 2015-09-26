@@ -68,15 +68,14 @@ public class RoboHash {
 
         int sampleSize = 1;
 
-        Bitmap buffer = repository.createBuffer(paths[0], sampleSize);
+        Bitmap buffer = repository.createBuffer(configuration.width(), configuration.height());
         Bitmap target = buffer.copy(Bitmap.Config.ARGB_8888, true);
-
 
         Canvas merged = new Canvas(target);
         Paint paint = new Paint(0);
 
-        // First image already added as copy form the buffer
-        for (int i = 1; i < paths.length; i++) {
+        // The first image is not added as copy form the buffer
+        for (int i = 0; i < paths.length; i++) {
             merged.drawBitmap(repository.getInto(buffer, paths[i], sampleSize), 0, 0, paint);
         }
         repository.returnBuffer(buffer);

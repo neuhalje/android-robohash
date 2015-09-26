@@ -35,26 +35,15 @@ public class ImageRepository {
         }
     }
 
-    public Bitmap createBuffer(String path, int sampleSize) throws IOException {
+    public Bitmap createBuffer(int width, int height) throws IOException {
         if (buffer != null) {
             return buffer;
         }
 
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = sampleSize;
-        options.inMutable = true;
+         buffer = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888); // this creates a MUTABLE bitmap
 
-        InputStream inputStream = null;
-        try {
-            inputStream = assets.open(path);
-            Bitmap bitmap = BitmapFactory.decodeStream(inputStream, null, options);
-            buffer = bitmap;
-            return bitmap;
-        } finally {
-            if (null != inputStream) {
-                inputStream.close();
-            }
-        }
+        return buffer;
+
     }
 
     public Bitmap getInto(Bitmap target, String path, int sampleSize) throws IOException {

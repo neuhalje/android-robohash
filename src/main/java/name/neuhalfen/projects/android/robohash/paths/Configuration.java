@@ -12,4 +12,16 @@ public interface Configuration {
      * @return the list of buckets with their size (1..) as values.
      */
     byte[] getBucketSizes();
+
+    /**
+     *
+     * @return The width of the robot images in pixel
+     */
+    int width();
+
+    /**
+     *
+     * @return The height of the robot images in pixel
+     */
+    int height();
 }

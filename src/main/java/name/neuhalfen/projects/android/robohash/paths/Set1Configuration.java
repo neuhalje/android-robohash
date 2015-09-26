@@ -71,4 +71,14 @@ public class Set1Configuration implements Configuration {
     public byte[] getBucketSizes() {
         return BUCKET_SIZES;
     }
+
+    @Override
+    public int width() {
+        return 300;
+    }
+
+    @Override
+    public int height() {
+        return 300;
+    }
 }
