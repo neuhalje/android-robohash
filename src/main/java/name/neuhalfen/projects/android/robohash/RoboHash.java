@@ -54,7 +54,7 @@ public class RoboHash {
      * This can be VERY slow (~15ms on a Nexus 5). Consider #useCache.
      *
      * @param handle which robot to retrieve
-     * @return image (1024x1024) that identifies the handle
+     * @return image (300x300) that identifies the handle
      * @throws IOException
      */
     public Bitmap imageForHandle(Handle handle) throws IOException {
