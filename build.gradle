@@ -29,7 +29,7 @@ task wrapper(type: Wrapper) {
 
 android {
     compileSdkVersion 'android-17'
-    buildToolsVersion '23.0.0'
+    buildToolsVersion '23.0.2'
 
     buildTypes {
         release {
