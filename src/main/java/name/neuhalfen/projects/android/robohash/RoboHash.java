@@ -55,7 +55,7 @@ public class RoboHash {
      *
      * @param handle which robot to retrieve
      * @return image (300x300) that identifies the handle
-     * @throws IOException
+     * @throws IOException Unexpected, because this would mean the build is broken (FIXME: Use unchecked Exception)
      */
     public Bitmap imageForHandle(Handle handle) throws IOException {
         if (null != memoryCache) {
