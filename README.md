@@ -101,8 +101,40 @@ The RoboHash images are available under the CC-BY-3.0 license.
 
 The source code is available under the MIT license.
 
+Building
+============
+
+Either build directly via `gradle build` or use the provided Dockerfile + script.
+
+Gradle build
+--------------
+Install the required android-sdk and build with `gradle build`. See [.travis.yml](.travis.yml) or the [Dockerfile](Dockerfile) for android SDK dependencies. 
+
+Build via Docker
+-------------
+You can use Docker or Docker Machine (e.g. on Mac OS) to build the library.
+
+First install [docker-compose](https://docs.docker.com/compose/install/) with the latest version.
+
+With docker-compose installed the provided  `./build_in_docker.sh` takes care of everything.
+
+### I get an error that docker-compose does not understand
+
+If you get the following error, then upgrade docker-compse.
+```shell
+./build_in_docker.sh
+Define and run multi-container applications with Docker.
+
+Usage:
+  docker-compose [options] [COMMAND] [ARGS...]
+  docker-compose -h|--help
+...
+```
+
+
+
 Publish AAR to bintray
-=================
+----------------------
 
 This is a reminder to myself:
 

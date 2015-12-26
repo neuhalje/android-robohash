@@ -1,0 +1,20 @@
+mount:
+    build: . 
+    volumes: 
+        - ./:/root/robohash:rw
+
+build: 
+    build: . 
+    command: sh -c 'cd /root/robohash && ./gradlew clean && ./gradlew build'
+    working_dir: /root/robohash
+    extends:
+      service: mount
+
+
+shell:
+    build: . 
+    command: /bin/bash
+    working_dir: /root/robohash
+    extends:
+      service: mount
+
