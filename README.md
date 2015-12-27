@@ -114,23 +114,10 @@ Build via Docker
 -------------
 You can use Docker or Docker Machine (e.g. on Mac OS) to build the library.
 
-First install [docker-compose](https://docs.docker.com/compose/install/) with the latest version.
-
-With docker-compose installed the provided  `./build_in_docker.sh` takes care of everything.
-
-### I get an error that docker-compose does not understand
-
-If you get the following error, then upgrade docker-compse.
-```shell
-./build_in_docker.sh
-Define and run multi-container applications with Docker.
-
-Usage:
-  docker-compose [options] [COMMAND] [ARGS...]
-  docker-compose -h|--help
-...
-```
-
+`./build_in_docker.sh` takes care of everything.
+1) Creates an image called `neuhalje/build_robohash:1.0`
+2) Mounts the local directory as `/root/robohash`
+3) Builds everything
 
 
 Publish AAR to bintray

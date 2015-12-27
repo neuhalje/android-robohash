@@ -1,4 +1,0 @@
-mount:
-    build: . 
-    volumes: 
-        - /mnt/hgfs/${PWD}:/root/robohash:rw
